@@ -132,10 +132,10 @@ For each active geo-zone specification, the system calculates what centre point 
 Once the database has been populated with all of the required data, the user will need to be able to quickly access this through a form that provides ease of use and interpretation. 
 
 #### Requirements
-Users of the application are going to want to be updated with their exposure risk information on a frequent basis. Given the ease of transmission of COVID-19, it is vital that users hold relevant knowledge on which locations they should and shouldn’t venture into. Therefore, it is key that the app pulls this information on a regular basis. Importantly, the user’s location information must never be compromised and it is ensured that the location information does not leave the device. This API path represents an integral aspect of the app funcationaly. 
+Users of the application are going to want to be updated with their exposure risk information on a frequent basis. Given the ease of transmission of COVID-19, it is vital that users hold relevant knowledge on which locations they should and shouldn’t venture into. Therefore, it is key that the app pulls this information on a regular basis. Importantly, the user’s location information must never be compromised and it is ensured that the location information does not leave the device. This API path represents an integral aspect of the app functionality. 
 
 #### Technical Breakdown of Required Functionality
-In order to match the requirements the following diagram flow is adopted in order to calculate the overall exposure risk of a user. There exist three main components to this process:
+In order to match the requirements, the following diagram flow is adopted in order to calculate the overall exposure risk of a user. There exist three main components to this process:
 
  1. The app determines what information it requires from the server and subsequently builds a request. In doing so, it ensures that ‘fake’ data is included to mask the true location of the device.
  2. The server receives the requested information, pulls the infected data points and returns a breakdown of geo-zones as well as their exposure ratings based upon the specified time zones.
