@@ -17,13 +17,23 @@ Decentralised data storage enables EINS users to store their geolocation data on
 
 The principle of self sovereign identity aims to put the ownership of a user's online identity back in their own hands. This can be done in many ways, and consists of many sub approaches, more recently the introduction of decentralized ledger technology to provide trustless verification of identities (including pseudonyms identities) and fully secure data encryption and ownership.
 
+## Road Map
+
+We have an external road map you can see provide feedback on our next features.
+
+Link: <a href="https://trello.com/b/cqPsEccR/ich-habs-open-feature-roadmap">Road Map</a>
+
+
 ## Repositories
 
-Mobile Application
+Mobile Application: <a href="">Mobile</a>
 
-Backend Application
+Backend Interface: <a href="">Backend</a>
 
 ## Architecture
+
+Architecture Overview: <a href="https://drive.google.com/a/viadata.io/file/d/15pGhhTioM0WS0AUlvAqBDclqIiv46d2r/view?usp=sharing">Diagram</a>
+
 
 ## Further Documentation
 
