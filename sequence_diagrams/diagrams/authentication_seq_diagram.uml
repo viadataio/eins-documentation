@@ -1,0 +1,37 @@
+actor User
+database Device Storage
+participant App
+boundary Privicy Boundary
+participant API
+database SQL Server
+participantgroup AWS
+lifelinecolor Privicy Boundary #Red
+==**++Authentication**==
+User->App: Initiate app dowload
+activate User
+activate App
+abox over App:Generate/Get Key Pair.
+abox over App:Generate Device ID (GUID).
+abox over App:Public server key is embedded in the app.
+App->API:Auth request [Public client key, Device ID, Signiture]
+activate API
+abox over API:Decrypt and check sygniture matches
+alt If doesn't match
+App<-API: Auth failed response
+App->User:
+else If matches
+abox over API: Generate a signiture.
+abox over API: Generate a JWR Token.
+API->SQL Server:Device info
+activate SQL Server
+API<-SQL Server:Save response
+deactivate SQL Server
+App<-API: Auth success response [Server Signiture, JWT Token]
+deactivate API
+activate Device Storage
+App->Device Storage: Server Signiture, JWTToken, Access Token
+deactivateafter Device Storage
+App->User:
+deactivate App
+deactivate User
+end

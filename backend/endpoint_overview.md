@@ -11,6 +11,7 @@ A blanket request rate limit per IP address is set for all endpoints. If the rat
 
 ### Responses
 All responses take on the standard form shown in the example below unless otherwise specified.
+
 ```JSON
 {
     "data": null,

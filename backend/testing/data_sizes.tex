@@ -1,0 +1,502 @@
+\documentclass[a4paper,open right,12pt]{report}
+\usepackage[a4paper]{geometry}
+\usepackage[flegn]{amsmath}
+\usepackage{url, amsfonts,amssymb,graphics,layout,amsmath,cite,notoccite,fancyhdr,lscape,setspace}
+\usepackage[titles]{tocloft}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{float}
+\usepackage{appendix}
+\usepackage{pdfpages}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{mathtools}
+\RequirePackage{if then}
+\fancyhf{}
+\pagestyle{fancy}
+\geometry{left=2.54cm, right=2.54cm, top=2.54cm, bottom=2.54cm}
+\raggedbottom
+%\graphicspath{}
+\onehalfspacing
+\fancyhead{}
+\fancyfoot{}
+\headheight = 15pt
+\headwidth = \textwidth
+\fancyhead[L]{The Delta Studio}
+\fancyhead[R]{Covid-VIA}
+\renewcommand{\footrulewidth}{0.4pt}
+\renewcommand{\chaptermark}[1]{\markboth{Chapter \thechapter:\ #1}{}}
+\fancyfoot[R]{\bfseries\thepage}
+\fancyfoot[C]{\begin{minipage}[c]{0.7\textwidth}\begin{center}\nouppercase{\leftmark}\end{center}\end{minipage}}
+\setlength{\parskip}{1.5ex plus 0.5ex minus 0.2ex}
+\setlength{\parindent}{0.0pt}
+\renewcommand{\bibname}{References}
+\setcounter{secnumdepth}{3}
+\renewcommand{\textfraction}{0.1}
+\renewcommand{\topfraction}{0.7}
+\renewcommand{\bottomfraction}{0.9}
+\renewcommand{\floatpagefraction}{0.6}
+\newcommand\userinstruction[1]{\textcolor{red}{#1}}
+
+\begin{document}
+\title{Ichabs} %Project Name
+\author{By William John Warne}
+\maketitle
+
+\pagenumbering{roman}
+\renewcommand{\contentsname}{Table of Contents}
+\addcontentsline{toc}{chapter}{Table of Contents}
+\makeatletter
+\renewcommand{\cftdotsep}{10000}
+\tableofcontents
+\newpage
+
+\pagenumbering{arabic}
+
+\chapter{Introduction - WORK IN PROGRESS}
+\section{Problem Definition and Background}
+
+\section{Objectives}
+This report has the following objectives:
+\begin{enumerate}
+    \item Determine the location data size required per entry.
+    \item Determine the location data size for the data transition processes.
+\end{enumerate}
+
+\chapter{Research}
+\section{Factors effecting performance}
+
+\subsection{Framework used}
+
+\subsection{Data storage}
+Location data is to be stored client side and server side. The server stores data gathered from all users while the device stores data pertaining to the user of that device.
+
+The following table indicates the bit sizes of type.
+\begin{table}[ht]
+\centering
+\caption{The number of bits in C\# predefined types.}
+    \begin{tabular}[t]{cc}
+    \hline
+        Type & Number of Bits\\
+    \hline
+        byte & 8 \\
+        short & 16 \\
+        int & 32 \\
+        long & 64 \\
+        float & 32 \\
+        double & 64 \\
+        decimal & 128 \\
+        char & 16 \\
+        bool & 8 \\
+        string & $\chi$ \\
+        guid & 304\\
+    \hline
+    \end{tabular}
+\end{table}
+
+\subsubsection{Server side storage}
+Server side storage can take the form of a SQL of NoSQL database. In context of this project the critical factor is weather or not a SQL database can handle the expected traffic. It is expected that a SQL database will be able to manage however if performance estimates dictate otherwise then NoSQL alternative implementations shall be looked at.
+
+\subsubsection{Server side hosting}
+% To do: Add to this section.
+
+\subsubsection{Client side storage}
+% To do: Add section.
+
+\subsection{Optimization}
+There are many ways to improve the performance of ASP.Net core applications. A few of the more relevant methods shall be discussed in this section.\cite{PerformanceBestPractices}
+\begin{description}
+    \item[Cache] Cacheing data prevents it needing to be fetched from the database on every request.
+    \item[Database cleanup] Reducing the number of entries stored in a database reduces the time required to sort through the database.
+    \item[JSON] Transferring large JSON object effects the performance in two ways; Large memory allocations are required for the object and the server response time is affected. Implementing iterative patterns and chunked transfer are two method's of reducing the impact.\cite{JsonArrayStreaming}
+    \item[Avoid blocking hot code paths] There are many ways to do this. Methods of speeding up hot code paths relevant to this project include: Processing data outside of the HTTP request where possible. Minimise database returned data. Minimize exceptions. Use no-tracking queries when fetching read only data.
+    \item[Real-time communication] Communicate using real-time communication options like SignalR.
+\end{description}
+
+\newpage
+\chapter{System design}
+The system consist of client side and server side subsystems.
+
+\section{High level design overview}
+A geographic coordinate based Discrete Global Grid system (DGG) with two resolutions is used to regionalise the earths surface. The Covid-19 exposure rating of these regions shall be tracked in time to build a time based heat map of the earth. Through comparison this of this information and a users time based location an individuals exposure to infection can be determined.
+
+\section{Generating exposure map}
+The exposure map is generated from user donated data. This data is in the form of geographic coordinates(latitude, longitude, accuracy/confidence, time stamp) which shall fall within as specific time based DGG region. Once determined the exposure rating of the region can be updated accordingly.
+
+\subsection{Exposure rating}
+Calculating the exposure rating is a two stage process; calculating the danger rating of each time-based region from which the users exposure rating is determined.
+\subsubsection{Sigmoid through origin}
+CALCULATING DANGER RATINGS
+
+The sum of infected coordinates mapped to to a specific region shall be used to calculate the danger rating. A logarithmic function shall be used to limit the danger rating to a predetermined value ($D_{max}$).
+
+\begin{equation} \label{Equation:DangerRating1}
+    D(x)=\frac{2D_{max}}{1+e^{-Mx}}-D_{max}
+\end{equation}
+\begin{itemize}
+    \item $D(x)$ is the danger rating.
+    \item $x$ is the sum of mapped coordinates.
+    \item $M$ is the gradient.
+\end{itemize}
+
+The sum of mapped coordinates should take into the coordinate accuracy rating of the coordinates. Region size also has a large impact on the danger rating. Larger the region are more likely to contain infected coordinates and the average social distance is likely to be greater. The region change and coordinate accuracy rating is accounted for in equation \ref{Equation:Gradient2}.
+
+\begin{equation} \label{Equation:Gradient1}
+    M=\frac{\sum_{i}^n\frac{\rho_{i}}{A(i)T}}{i}
+\end{equation}
+\begin{equation} \label{Equation:Gradient2}
+    M\approx\frac{\bar{\rho}}{AT}
+\end{equation}
+\begin{equation} \label{Equation:Gradient3}
+    Mx\approx\frac{\sum{\rho_{i}}}{AT}
+\end{equation}
+
+\begin{itemize}
+    \item $M$ is the gradient ($M > 0$).
+    \item $A(i)$ is the area of the zone coordinate i falls within.
+    \item $\rho_{i}$ is the accuracy of coordinate i.
+    \item $\bar{\rho}$ is the mean accuracy of all coordinates.
+    \item $A$ is the total area.
+    \item $T$ is the time over which has been requested.
+\end{itemize}
+
+There are many ways to model the effect of area ($A$) and time ($T$) these shall be discussed from least complex to most complex.
+
+\begin{enumerate}
+    \item $A=\alpha a$ and $T=\tau t$
+    \item $A=\alpha a^{A}$ and $T=\tau t^{B}$
+\end{enumerate}
+
+CALCULATING EXPOSURE RATING
+
+The users coordinates and infected regions data shall be used to calculate the users overall exposure rating. Again Sigmoids function shall be used.
+
+\begin{equation}
+    E(x)=\frac{\sum_{i}^n{\frac{2D_{i}}{1+e^{-Mx}}-D_{i}}}{R}
+\end{equation}
+\begin{itemize}
+    \item $E(x)$ is the exposure rating.
+    \item $x$ is the number of coordinates that lie within infected region i.
+    \item $M$ is the gradient.
+    \item $R$ is the number of regions that coordinates are mapped to.
+\end{itemize}
+
+Coordinate inaccuracy again determines the gradient of the graph.
+
+\begin{equation} \label{Equation:Gradient1}
+    M=\frac{\sum_{i}^n\rho_{i}}{i}
+\end{equation}
+\begin{equation} \label{Equation:Gradient2}
+    M\approx\bar{\rho}
+\end{equation}
+\begin{itemize}
+    \item $M$ is the gradient ($M > 0$).
+    \item $\rho_{i}$ is the accuracy of coordinate i.
+    \item $\bar{\rho}$ is the mean accuracy of all coordinates.
+\end{itemize}
+
+
+\subsubsection{Non-shifted Sigmoid}
+\subsubsection{Hyperbolic tangent}
+\subsubsection{Lambda sigmoid}
+
+\begin{tikzpicture}
+\begin{axis}
+[
+    width=0.8\textwidth,
+    title={Alternative mapping functions},
+    axis lines = left,
+    xlabel = {$x$},
+    ylabel = {$f(x)$},
+]
+\addplot
+[
+    domain=0:20, 
+    samples=100, 
+    color=green,
+]
+{2/(1+e^(-x))-1};
+\addlegendentry{Shifted sigmoid}
+
+\addplot
+[
+    domain=0:20, 
+    samples=100, 
+    color=red,
+]
+{1/(1+e^(-x+10))};
+\addlegendentry{Sigmoid}
+
+\addplot
+[
+    domain=0:20, 
+    samples=100, 
+    color=blue,
+]
+{tanh(x)};
+\addlegendentry{Tanh}
+
+\end{axis}
+\end{tikzpicture}
+
+\section{Database design}
+To ensure adequate performance of the app the database shall be designed in accordance with the optimization research. The 'hot code paths' are identified and the database designed to maximise Http request speed of these paths. This includes minimizing the JSON payloads that are transmitted between FE and BE.
+
+\subsection{Hot code paths}
+The system shall be designed to accommodate the following location related HTTP request that are likely to place the most demand on the system due to the frequency at which they will be used and/or the size of the payload.
+\begin{description}
+    \item[Posting the donated date] $\pm$ 2 weeks of location data may be donated to the API by a positively tested user. $\pm$ 1's a day of data may be uploaded to the API frrom positively tested users.
+    \item[Getting infected data] $\pm$ 1's a day data shall be sent from the API to a users who have never tested positive.
+\end{description}
+
+\subsection{Location tables}
+There shall be 4 location tables; GeoZoneSpecifications, GeoZones, GeoTimeZones, GeoTimeZoneLog.\cite{LocationTables}
+
+The GeoTimeZoneLog shall be updated regularly with the insertion of entries during the data donation process's. Each entry of the GeoTimeZoneLog table totals to 736 bits. The total size of data stored per donation is dependant on the time between captured data entries.
+
+\begin{tikzpicture}
+\begin{axis}
+[
+    width=0.8\textwidth,
+    title={Total date sizes storage vs the average time between captured data entries.},
+    axis lines = left,
+    xlabel = {Time between data captures [s]},
+    ylabel = {Size of data package [MB]},
+]
+\addplot
+[
+    domain=0:600, 
+    samples=100, 
+    color=green,
+]
+{736*3600*24/(x*8000000)};
+\addlegendentry{1 days worth of data.}
+
+\addplot
+[
+    domain=0:600, 
+    samples=100,
+    color=red,
+]
+{736*3600*24*14/(x*8000000)};
+\addlegendentry{2 weeks worth of data.}
+
+\addplot
+[
+    domain=0:600, 
+    samples=100, 
+    color=blue,
+]
+{736*3600*24*21/(x*8000000)};
+\addlegendentry{3 weeks worth of data.}
+
+\end{axis}
+\end{tikzpicture}
+
+The addition of staging tables is a possibility which would increase the HTTP request speed.
+
+\chapter{Data Transfer}
+From the research conducted it is clear that JSON size heavily impacts performance. The JSON payloads used to transfer data to and from the hot code paths are analysed in this section.
+
+JSON payload sizes are determined from approximating the size of each item within the payload and the number of items within a payload.\cite{ByteSizeMatters} This method does not include the size of any overheads. However, the JSON payloads of concern are those with a large ‘body’ which results in negligible change due to the payload overhead.
+\section{Coordinate transfer}
+%To do: Introduce graph.
+\begin{tikzpicture}
+\begin{axis}
+[
+    width=0.8\textwidth,
+    title={Coordinate payload sizes vs the average time between captured data entries.},
+    axis lines = left,
+    xlabel = {Time between data captures [s]},
+    ylabel = {Size of data package [MB]},
+]
+
+\addplot
+[
+    domain=0:600,
+    samples=100, 
+    color=green,
+]
+{((141*3600*24/x)+40)/1000000};
+\addlegendentry{1 days worth of data.}
+
+\addplot
+[
+    domain=0:600,
+    samples=100, 
+    color=red,
+]
+{((141*3600*24*14/x)+40)/1000000};
+\addlegendentry{2 weeks worth of data.}
+
+\addplot
+[
+    domain=0:600,
+    samples=100, 
+    color=blue,
+]
+{((141*3600*24*21/x)+40)/1000000};
+\addlegendentry{3 weeks worth of data.}
+
+\end{axis}
+\end{tikzpicture}
+
+Graph *** shows that 
+
+\section{Exposure coordinate transfer}
+\begin{tikzpicture}
+\begin{axis}
+[
+    width=0.8\textwidth,
+    title={Request package sizes vs the number of area requests.},
+    axis lines = left,
+    xlabel = {Number of area requests},
+    ylabel = {Size of data package [KB]},
+]
+
+\addplot
+[
+    domain=0:100, 
+    samples=3, 
+    color=red,
+]
+{(128+(120*x))/1000};
+
+\end{axis}
+\end{tikzpicture}
+
+\section{Exposure region transfer}
+\begin{tikzpicture}
+\begin{axis}
+[
+    width=0.8\textwidth,
+    title={Request package sizes vs the number of area requests.},
+    axis lines = left,
+    xlabel = {Number of geoZones.},
+    ylabel = {Number of exposure entries.},
+    zlable = {Size of data package [KB]},
+    colormap/cool,
+]
+
+\addplot3
+[
+    mesh,
+    domain=0:100, 
+    samples=50, 
+]
+{(187+(95*x)+(99*y))/1000};
+
+\end{axis}
+\end{tikzpicture}
+
+\chapter{Appendix}
+\section{SQL Tables}
+\begin{table}[ht]
+\centering
+\caption{GeoZones.}
+    \begin{tabular}[t]{ccc}
+    \hline
+        Name & Type & Number of Bits\\
+    \hline
+        Id & Guid & 128 \\
+        CentreLatitude & Decimal & 16 \\
+        CentreLongitude & Decimal & 32 \\
+        SideLength & Decimal & 64 \\
+        ParentId & Guid & 128 \\
+    \hline
+        Total & - & 368
+    \end{tabular}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{GeoTimeZones.}
+    \begin{tabular}[t]{ccc}
+    \hline
+        Name & Type & Number of Bits\\
+    \hline
+        Id & Guid & 128 \\
+        GeoZoneId& Guid & 128 \\
+        PreviouseGeoTimeZoneId & Guid & 128 \\
+        StartTime & Int & 32 \\
+        EndTime & Int & 32 \\
+    \hline
+        Total & - & 448
+    \end{tabular}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{GeoTimeZoneLog.}
+    \begin{tabular}[t]{ccc}
+    \hline
+        Name & Type & Number of Bits\\
+    \hline
+        Id & Guid & 128 \\
+        GeoTimeZoneId & Guid & 128 \\
+        CoordinateAccuracy & Decimal & 32 \\
+    \hline
+        Total & - & 288
+    \end{tabular}
+\end{table}
+
+\section{Payload Tables}
+\begin{table}[ht]
+\centering
+\caption{Donation payload.}
+    \begin{tabular}[t]{cc}
+    \hline
+        Name & Number of Bytes\\
+    \hline
+        Package & 40 \\
+        Coordinates & 141\\
+    \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{Request payload.}
+    \begin{tabular}[t]{cc}
+    \hline
+        Name & Number of Bytes\\
+    \hline
+        Package & 128 \\
+        AreaRequests & 120\\
+    \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{Response payload.}
+    \begin{tabular}[t]{cc}
+    \hline
+        Name & Number of Bytes\\
+    \hline
+        Package & 187 \\
+        GeoZones & 95\\
+        ExposureTimes & 99\\
+    \hline
+    \end{tabular}
+\end{table}
+
+\section{Results Tables}
+\begin{table}[ht]
+\centering
+\caption{The date package sizes for a two week period vs the average time between data entries.}
+    \begin{tabular}[t]{ccc}
+    \hline
+        Time [s] & Size for 2 week period & Size for 3 week period\\
+        
+    \hline
+        Package & 40 \\
+        Coordinates & 141\\
+    \hline
+    \end{tabular}
+\end{table}
+
+\bibliographystyle{IEEEtran}
+\bibliography{Reference}
+
+\end{document}

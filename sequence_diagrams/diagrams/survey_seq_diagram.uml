@@ -1,0 +1,32 @@
+actor User
+database Device Storage
+participant App
+boundary Privicy Boundary
+participant API
+database SQL Server
+participantgroup AWS
+lifelinecolor Privicy Boundary #Red
+==**++Survey**==
+User->App: Initiat survay
+activate User
+activate App
+App->Device Storage: Survay submission
+activate Device Storage
+Device Storage->App: Save success
+deactivate Device Storage
+App->User:Donation offer
+alt If offer is rejected
+User->App:Reject data donation
+else If donation accepted
+User->App: Allow survay data donation
+deactivate User
+App->API: Donated survay data
+activate API
+API->SQL Server: Donated data
+activate SQL Server
+SQL Server->API: Save success
+deactivate SQL Server
+API->App: Donation success
+deactivate API
+deactivate App
+end

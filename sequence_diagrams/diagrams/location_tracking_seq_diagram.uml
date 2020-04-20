@@ -1,0 +1,17 @@
+actor User
+database Device Storage
+participant App
+boundary Privicy Boundary
+participant API
+database SQL Server
+participantgroup AWS
+lifelinecolor Privicy Boundary #Red
+==**++Location Tracking**==
+activate User
+User->App: Enable location tracking
+deactivateafter User
+activate App
+App->Device Storage: Device location data
+activate Device Storage
+deactivate App
+deactivateafter Device Storage
