@@ -2,7 +2,7 @@
 
 
 ## Introduction
-This document details the algorithm for detecting COVID-19 exposure risk amongst citizens, primarily achieved through GPS location tracking. This document attempts to explain the overall algorithm from a high level perspective before breaking it down into its key components (API payloads and database structures). 
+This document details the algorithm for detecting COVID-19 exposure risk amongst citizens, primarily achieved through GPS location tracking. This document attempts to explain the overall algorithm from a high-level perspective before breaking it down into its key components (API payloads and database structures). 
 
 ## System Requirements
 The geo-location tracing application needs to accurately calculate a user’s exposure risk based on their location history. Important to note is that, unlike similar COVID-19 tracing applications, EINS is structurally designed to calculate and feedback an individual's exposure based on their location rather than tracking direct history of contact between an infected person and someone potentially at risk. This component of the application will be dealt with in a separate system. 
@@ -13,7 +13,7 @@ Additionally, the system must be able to manage and handle updates of previously
 
 In a study completed by the Robert Koch Institute (RKI), an individual is deemed to be infectious for as long as two and half days before displaying symptoms. To err on the side of caution, EINS considers any infected user to have been infectious from three days prior to their confirmed and tested symptoms date. Should a user not have disclosed their status (or be asymptomatic), then they would be considered as infectious as of one week before the positive test result date. Based on the above, and considering the length it may take for a person to get tested and receive test results, a user must be able to check for exposure for up to a minimum of two weeks prior to the current time.
 
-It is expected that the EINS application will gain up to 50 million users. Due to the influx of voluminous data that is expected, it is therefore of vital importance that the system is designed in such a manner where scalability is a seamless operation. Hence,the following key system requirements need to be met:
+It is expected that the EINS application will gain up to 50 million users. Due to the influx of voluminous data that is expected, it is therefore of vital importance that the system is designed in such a manner where scalability is a seamless operation. Hence, the following key system requirements need to be met:
 
  - The system must be able to provide a user with an exposure risk based on proximity to known positive users.
  - The system must protect the user’s anonymity.
@@ -23,7 +23,7 @@ It is expected that the EINS application will gain up to 50 million users. Due t
 ## Overview
 
 ## Technical Breakdown
-This section of the document will delineate the systems technicalities covering the areas from the database structure right through to the individual processes and end point app processing.
+This section of the document will delineate the systems technicalities, covering the areas from the database structure right through to the individual processes and endpoint app processing.
 
 ### Database Structure
 Due to the unavoidable large data sets that will quickly be incurred from high volumes of traffic, the database structure is critical. The correct and sound structure of the EINS database will ensure that upon API requests, processing is seamless and efficient. Please see the database structure below: 
@@ -219,11 +219,11 @@ Once processed, the server needs to return the data in an easy-to-handle respons
 ```
 
 Where:
- * geoZoneSpecId, latRange and longRange all return information about the geo-zones that are being returned
- * zones contains the zone specific information:
+ * geoZoneSpecId, latRange and longRange all contain information about the geo-zones that are being returned
+ * zones contains the zone-specific information:
  * centreLatitude and centreLongitude share information over the location of the geo-zone
  * exposures contains a list of exposure information by time period
-     - Exposure is the rating as a percentage
+    - Exposure is the rating as a percentage
     - start and end indicate the time period as unix timestamps
 
 #### Estimation of Response Data Size
@@ -261,7 +261,7 @@ It is logical to assume that the risk of infection for a given region and time i
 <img src="Images/ExposureEquation11.PNG" height="50">
 
  - Er(x)is the exposure rating of a specified region.
- - x is the number of known infected time based locations in the region.
+ - x is the number of known infected time-based locations in the region.
  - Ermax the predetermined maximum exposure rating per region.
  - M is the equation gradient.
 
@@ -274,7 +274,7 @@ Remembering that Mx is equal to the density of infection the equation for M can 
  - i is the confidence of each location position.
  - is the average confidence of all selected locations.
 
-Each location has a confidence interval associated with it which ranges between 0-1. In theory, the less the confidence interval of the location, the less it should contribute to the exposure rating of it’s regions. The magnitude of these effects should also be inversely proportional to the size (area) of the zone. Further, location confidence should also have the inverse effect on surrounding regions, however this is not accounted for in the implemented middle.
+Each location has a confidence interval associated with it which ranges between 0-1. In theory, the less the confidence interval of the location, the less it should contribute to the exposure rating of its regions. The magnitude of these effects should also be inversely proportional to the size (area) of the zone. Further, location confidence should also have the inverse effect on surrounding regions, however this is not accounted for in the implemented middle.
 
 ##### Stage 2: User Exposure Risk
 A user’s coordinates are mapped to the infected regions of known exposure ratings. By using a similar method to Step 1, a Sigmoid function is applied to the sum of coordinates to limit the exposure rating to an acceptable range.
@@ -297,9 +297,9 @@ Due to there being no link between donated infected coordinates and users donati
 ## System Limitations
 As with any system, there do exist limitations as well as operation areas that could be improved. Most notably to this project are the following areas: the inaccuracy of the current geo-zoning system, the inability to account for objects on the ground and the lack of consideration of altitude.
 
-As previously discussed, the current implementation of the block system leads to variation in the block sizes as the zones move further away from the equator. This method was chosen due to its simplicity as well as its speed to implementation. However, in spite of this varying size, this should not detrimentally affect the values of the exposure risks, allowing them to be seriously considered for what they represent. As zones move further away from the equator, a small change in the risk of that zone will be incurred. However, when combined with the fact that this area is one of many areas that combine to give the overall risk, the level of inaccuracy that is as a result will not prove significant to affect the overall outcome. However, a method of exact precision will be sought for future implementations. 
+As previously discussed, the current implementation of the block system leads to variation in the block sizes as the zones move further away from the equator. This method was chosen due to its simplicity as well as its speed to implementation. However, in spite of this varying size, this should not detrimentally affect the values of the exposure risks, allowing them to be seriously considered for what they represent. As zones move further away from the equator, a small change in the risk of that zone will be incurred. However, when combined with the fact that this area is one of many areas that combine to give the overall risk, tthe resulting inaccuracy will not prove significant to affect the overall outcome. However, a method of exact precision will be sought for future implementations. 
 
-Additionally, this system cannot take into account real world objects such as walls, houses and other protective measures. For example, should a user live in an apartment block and their neighbour is positive and self-isolating, it is likely that the app will pick up that user as ‘high-risk’ despite the fact that they have not been in direct contact with that person. However, as the speed at which this virus spreads has been repeatedly made clear, even the boundaries of such an apartment wall does not mean that an individual is not still at risk. Notably, due to the nature in which the virus can linger on surfaces, this system will pick up potential exposure risks that many of the bluetooth collision systems would otherwise not be able to detect. 
+Additionally, this system cannot take into account real-world objects such as walls, houses and other protective measures. For example, should a user live in an apartment block and their neighbour is positive and self-isolating, it is likely that the app will pick up that user as ‘high-risk’ despite the fact that they have not been in direct contact with that person. However, as the speed at which this virus spreads has been repeatedly made clear, even the boundaries of such an apartment wall does not mean that an individual is not still at risk. Notably, due to the nature in which the virus can linger on surfaces, this system will pick up potential exposure risks that many of the bluetooth collision systems would otherwise not be able to detect. 
 
 ## Future Considerations
 In order to both overcome some of the limitations and improve upon them, improvements can be adhered to such as:  upgrading of the geo-zone system to account for the nonlinear aspect of longitude, improving the exposure risk calculation and utilising a ‘syncing process’ for the sharing of data instead of the current REST system.
