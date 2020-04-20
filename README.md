@@ -21,8 +21,9 @@ The principle of self sovereign identity aims to put the ownership of a user's o
 
 We have an external road map you can see provide feedback on our next features.
 
-Link: <a href="https://trello.com/b/cqPsEccR/ich-habs-open-feature-roadmap">Road Map</a>
+Road Map: <a href="https://trello.com/b/cqPsEccR/ich-habs-open-feature-roadmap">Link</a>
 
+User Journeys: <a href="https://github.com/viadataio/eins-documentation/blob/master/user_journeys/eins%20_user_journey%20v1.0.0.pdf">Link</a>
 
 ## Repositories
 
