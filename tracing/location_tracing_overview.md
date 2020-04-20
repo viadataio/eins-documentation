@@ -257,7 +257,7 @@ Calculating the exposure risk consists of a two-stage process:
 ##### Stage 1: Region Exposure Rating
 It is logical to assume that the risk of infection for a given region and time is proportional to the density of infection. To limit the risk factor to an acceptable range, the infection density is mapped to a Sigmoid function.
 
-<img src="Images/ExposureEquation11.PNG" height="50">
+<img src="images/ExposureEquation11.PNG" height="50">
 
  - Er(x)is the exposure rating of a specified region.
  - x is the number of known infected time-based locations in the region.
@@ -266,7 +266,7 @@ It is logical to assume that the risk of infection for a given region and time i
 
 Remembering that Mx is equal to the density of infection the equation for M can be determined.
 
-<img src="Images/ExposureEquation12.PNG" height="75">
+<img src="images/ExposureEquation12.PNG" height="75">
 
  - A is the area of the given region.
  - t is the length of time.
@@ -278,7 +278,7 @@ Each location has a confidence interval associated with it which ranges between 
 ##### Stage 2: User Exposure Risk
 A user’s coordinates are mapped to the infected regions of known exposure ratings. By using a similar method to Step 1, a Sigmoid function is applied to the sum of coordinates to limit the exposure rating to an acceptable range.
 
-<img src="Images/ExposureEquation21.PNG" height="75">
+<img src="images/ExposureEquation21.PNG" height="75">
 
  - E(x) is the exposure rating for a specific user.
  - x is the number of coordinates in a given region.
@@ -288,7 +288,7 @@ A user’s coordinates are mapped to the infected regions of known exposure rati
 
 Coordinate inaccuracy again determines the equation gradient for the same reasons stated in Step 1.
 
-<img src="Images/ExposureEquation22.PNG" height="85">
+<img src=iImages/ExposureEquation22.PNG" height="85">
 
 Due to there being no link between donated infected coordinates and users donating these coordinates, it is not possible to factor in any information related to the infected individuals. This includes information like the stage that the virus is at as well as the level of infection spreading prevention which has been employed. Furthermore, the environment at each infectious location is also not considered, however it could be easily added to the moddle at a later stage.
 
