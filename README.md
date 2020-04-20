@@ -1,8 +1,8 @@
 <img src="eins.png" height="164" width="128">
 
-## Introduction
+## Introduction 
 
-This repository contains a solution for a decentralized privacy preserving contact tracing system. 
+This repository contains a solution for a decentralized privacy preserving contact tracing system named <a href="https://ichhabs.app">EINS</a>.
 
 ### Goal
 
@@ -39,5 +39,7 @@ Architecture Overview: <a href="https://drive.google.com/a/viadata.io/file/d/15p
 
 
 ## Further Documentation
+
+Please see the <a href="https://github.com/viadataio/eins-documentation/tree/master/general">general</a> section
 
 
