@@ -19,6 +19,10 @@ The principle of self sovereign identity aims to put the ownership of a user's o
 
 ## Repositories
 
+Mobile Application
+
+Backend Application
+
 ## Architecture
 
 ## Further Documentation
