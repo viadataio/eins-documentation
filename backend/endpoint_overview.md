@@ -24,7 +24,7 @@ All responses take on the standard form shown in the example below unless otherw
 ```
 
 ## Device Authentication
-### Authentication - POST: {{URL}}v1/devices
+### Authentication - POST: {{URL}}/v1/devices
 Authenticates a device using a standard key pair signature verification (RSA2048). The public key must be in the der64 format.
 
 ##### NEW DEVICE
@@ -72,12 +72,12 @@ Unsuccessful response - 401:
 * When the AppId and signature pair are invalid.
 * When a public key or operating system update is attempted.
 
-### Delete device - DELETE: {{URL}}v1/devices
+### Delete device - DELETE: {{URL}}/v1/devices
 Deletes all information associated with a device from the API, this includes the AppId, PublicKey, OperatingSystem, LanguageId, and PushToken.
 
 Donated data and survey submissions can not be removed through this EP because there is no direct or indirect link between this data and a device.
 
-### Add/Update push token - POST: {URL}}v1/devices/push_token
+### Add/Update push token - POST: {URL}}/v1/devices/push_token
 Adds a push token to or updates the existing push token of an already authenticated device.
 #### Requests
 ```JSON
@@ -85,12 +85,12 @@ Adds a push token to or updates the existing push token of an already authentica
 	"pushToken": ""
 }
 ```
-### Delete push token - DELETE: {{URL}}v1/devices/push_token
+### Delete push token - DELETE: {{URL}}/v1/devices/push_token
 Deletes the push token associated with an authenticated device.
 
 ## GeoData 
 
-### Get geo-zone specifications - GET: {{URL}}v1/geodata/zones/specifications
+### Get geo-zone specifications - GET: {{URL}}/v1/geodata/zones/specifications
 Gets a list of all geo zone specifications currently supported by the server along with some basic information.
 
 #### Responses
@@ -122,7 +122,7 @@ Gets a list of all geo zone specifications currently supported by the server alo
 }
 ```
 
-### Stream zone exposures - POST: {{URL}}v1/geodata/zones/exposure
+### Stream zone exposures - POST: {{URL}}/v1/geodata/zones/exposure
 Returns information on zones and their exposure risk based upon the time and location that is specified. Creates a file internally and then streams this to the client.
 #### Requests
 ```JSON
@@ -184,7 +184,7 @@ Returns information on zones and their exposure risk based upon the time and loc
     }
 }
 ```
-### Log coordinates - POST: {{URL}}v1/geodata/coordinates
+### Log coordinates - POST: {{URL}}/v1/geodata/coordinates
 Donates a list of infected coordinates to the api. Once data is donated to the API it can not be deleted from the API.
 #### Requests
 ```JSON
@@ -204,7 +204,7 @@ Donates a list of infected coordinates to the api. Once data is donated to the A
 ]
 ```
 ## Survey
-### Get symptoms - GET: {{URL}}v1/symptoms
+### Get symptoms - GET: {{URL}}/v1/symptoms
 Gets a key value pair list of the symptoms in the language specified in the query parameter.
 #### Responses
 ```JSON
@@ -227,7 +227,7 @@ Gets a key value pair list of the symptoms in the language specified in the quer
     }
 }
 ```
-### Suvey submission - POST: {{URL}}v1/submission/covid
+### Suvey submission - POST: {{URL}}/v1/submission/covid
 Submits survey data. There is no limit to the number of submissions. Various validations on what you can submit depending on what the stats are. Symptoms must be submitted using the text copy key. Language and country must be submitted using the alpha2 format. If “IsSymptomatic” is set to false no symptoms may be provided.
 
 Status must be one of the following; Positive, Negative, Unsure, or Recovered.
@@ -293,7 +293,7 @@ Unsure
 ```
 
 ## Statistics
-### Get statistics - GET: {{URL}}v1/statistics/covid/google?countries={Alpha2}
+### Get statistics - GET: {{URL}}/v1/statistics/covid/google?countries={Alpha2}
 Gets the latest covid statistics of the requested country. Statistics are retrieved through Google’s BigQuery API from the Johns Hopkins University (JHU) Repository of aggregated coronavirus COVID-19 cases.
 
 #### Responses
