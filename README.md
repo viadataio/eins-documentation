@@ -1,4 +1,4 @@
-<img src="IchHabsLogo.png" height="164" width="128">
+<img src="eins.png" height="164" width="128">
 
 ## Introduction
 
