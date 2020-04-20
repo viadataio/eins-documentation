@@ -140,7 +140,7 @@ In order to match the requirements, the following diagram flow is adopted in ord
  2. The server receives the requested information, pulls the infected data points and returns a breakdown of geo-zones as well as their exposure ratings based upon the specified time zones.
  3. The app then links this returned information to its own data points and calculates an overall risk which will then be displayed to the user.
  
- <img src="Images/ExposureFlow.png">
+ <img src="images/ExposureFlow.png">
 
 ```
 The structure of the request information to the server is as follows:
@@ -257,38 +257,22 @@ Calculating the exposure risk consists of a two-stage process:
 ##### Stage 1: Region Exposure Rating
 It is logical to assume that the risk of infection for a given region and time is proportional to the density of infection. To limit the risk factor to an acceptable range, the infection density is mapped to a Sigmoid function.
 
-<img src="images/ExposureEquation11.PNG" height="50">
-
- - Er(x)is the exposure rating of a specified region.
- - x is the number of known infected time-based locations in the region.
- - Ermax the predetermined maximum exposure rating per region.
- - M is the equation gradient.
+<img src="images/ExposureEquation11.PNG" height="150">
 
 Remembering that Mx is equal to the density of infection the equation for M can be determined.
 
-<img src="images/ExposureEquation12.PNG" height="75">
-
- - A is the area of the given region.
- - t is the length of time.
- - i is the confidence of each location position.
- - is the average confidence of all selected locations.
+<img src="images/ExposureEquation12.PNG" height="175">
 
 Each location has a confidence interval associated with it which ranges between 0-1. In theory, the less the confidence interval of the location, the less it should contribute to the exposure rating of its regions. The magnitude of these effects should also be inversely proportional to the size (area) of the zone. Further, location confidence should also have the inverse effect on surrounding regions, however this is not accounted for in the implemented middle.
 
 ##### Stage 2: User Exposure Risk
-A user’s coordinates are mapped to the infected regions of known exposure ratings. By using a similar method to Step 1, a Sigmoid function is applied to the sum of coordinates to limit the exposure rating to an acceptable range.
+A user’s coordinates are mapped to the infected regions of known exposure ratings. By using a similar method to Step 1, a Sigmoid function is again to limit the exposure rating to an acceptable range.
 
-<img src="images/ExposureEquation21.PNG" height="75">
-
- - E(x) is the exposure rating for a specific user.
- - x is the number of coordinates in a given region.
- - Er is the exposure rating of a given region.
- - R is the number of infected r
- - M is the equation gradient.
+<img src="images/ExposureEquation21.PNG" height="175">
 
 Coordinate inaccuracy again determines the equation gradient for the same reasons stated in Step 1.
 
-<img src=iImages/ExposureEquation22.PNG" height="85">
+<img src=images/ExposureEquation22.PNG" height="185">
 
 Due to there being no link between donated infected coordinates and users donating these coordinates, it is not possible to factor in any information related to the infected individuals. This includes information like the stage that the virus is at as well as the level of infection spreading prevention which has been employed. Furthermore, the environment at each infectious location is also not considered, however it could be easily added to the moddle at a later stage.
 
