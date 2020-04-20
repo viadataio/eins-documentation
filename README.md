@@ -27,9 +27,11 @@ User Journeys: <a href="https://github.com/viadataio/eins-documentation/blob/mas
 
 ## Repositories
 
-Mobile Application: <a href="">Mobile</a>
+Mobile Application: Coming Soon 
+<!-- <a href="">Mobile</a> -->
 
-Backend Interface: <a href="">Backend</a>
+Backend Interface: Coming Soon 
+<!-- <a href="">Backend</a> -->
 
 ## Architecture
 
