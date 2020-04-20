@@ -1,4 +1,5 @@
-# API ENDPOINTS | EINS
+# Backend Endpoint Overview
+
 This document details the process of each EP of the API including the responses and requests.
 
 ### Requests

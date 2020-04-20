@@ -1,5 +1,4 @@
-# Eins - Location Tracing Overview
-
+# Location Tracing Overview
 
 ## Introduction
 This document details the algorithm for detecting COVID-19 exposure risk amongst citizens, primarily achieved through GPS location tracking. This document attempts to explain the overall algorithm from a high-level perspective before breaking it down into its key components (API payloads and database structures). 
