@@ -54,7 +54,8 @@ Successful response
         "accessToken": "",
         "accessTokenExpiry": "",
         "signature": {
-            "plainTextData": ""
+            "plainTextData": "",
+	    "signedData": ""
         }
     },
     "meta": {
@@ -125,13 +126,13 @@ Returns information on zones and their exposure risk based upon the time and loc
 ```JSON
 {
   "geoZoneSpecId": 6,
-  "exposureThreshold": 0,
+  "exposureThreshold": 0,		\\ Percentage value between 0-100%
   "areaRequests": [
     {
       "lat": -33.25188,
       "long": 18.41853,
-      "start": 1586964196,
-      "end": 1586965196
+      "start": 1586964196,		\\ Unix
+      "end": 1586965196			\\ Unix
     },
     {
       "lat": -33.88356,
