@@ -1,4 +1,4 @@
-# EINS
+<img src="IchHabsLogo.png" height="128" width="128">
 
 ## Introduction
 
