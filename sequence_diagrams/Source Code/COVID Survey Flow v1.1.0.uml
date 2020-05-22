@@ -7,10 +7,10 @@ database SQL Server
 participantgroup AWS
 lifelinecolor Privicy Boundary #Red
 ==**++Survey**==
-User->App: Initiat survay
+User->App: Initiate survay
 activate User
 activate App
-App->Device Storage: Survay submission
+App->Device Storage: Survey submission
 activate Device Storage
 Device Storage->App: Save success
 deactivate Device Storage

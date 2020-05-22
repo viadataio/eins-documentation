@@ -1,0 +1,30 @@
+
+
+actor User
+database Device Storage
+database Secure Key Storage
+participant App
+participant API
+
+activate User
+activate App
+User->App: Opens the App
+App->User: Requests device authentication (eg biometrics)
+abox over User: Performs authentication
+activate Secure Key Storage
+User->Secure Key Storage: Authentication successful
+deactivate User
+abox over Secure Key Storage: Decrypts app keys
+Secure Key Storage->App: Decrypted keys
+deactivate Secure Key Storage
+abox over App: Generate digital signature
+App->API: Authenticate
+abox over API: Process app auth call and signature
+API->App: Auth success with server signature
+abox over App: Verify server signature
+activate Device Storage
+Device Storage->App:Encrypted app data
+abox over App: Decrypt stored data with app keys
+abox over App: Perform app functonality...
+deactivate Device Storage
+deactivate App
