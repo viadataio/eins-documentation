@@ -1,0 +1,47 @@
+actor User
+database Device Storage
+participant App
+boundary Privicy Boundary
+participant API
+database SQL Server
+participantgroup AWS
+lifelinecolor Privicy Boundary #Red
+
+==**++Authentication**==
+User->App: Open mobile app
+activate User
+activate App
+abox over App:Public server key is embedded in the app.
+abox over App:Generate/Get Key Pair.
+abox over App:Generate/get app Id.
+abox over App:Generate 32 byte client seed
+abox over App:Generate 48 byte pre-master-secret (PMS)
+abox over App:Encrypt PMS using server public encryption key
+abox over App:Generate device signature using device key pair
+App->API:Auth request [Public client key, Device ID, Signature, Seed, Encrypted PMS]
+activate API
+abox over API:Verify device signature with device pub key
+alt If doesn't match
+App<-API: Auth failed response
+App->User:
+else If matches
+abox over API: Decrypt PMS and verify length
+abox over API: Generate a 32 byte server seed
+abox over API: Generate session keys
+abox over API: Generate digital signiture with server signing key
+abox over API: Generate a JWR Token.
+abox over API: Initiate session
+API->SQL Server:Device info, session info
+activate SQL Server
+API<-SQL Server:Save response
+deactivate SQL Server
+App<-API: Auth success response [Server Signiture, JWT Token, Server Seed]
+deactivate API
+abox over App:Generate session keys (using seeds and raw PMS)
+activate Device Storage
+App->Device Storage: JWT, Session keys
+deactivateafter Device Storage
+App->User:
+deactivate App
+deactivate User
+end
