@@ -11,7 +11,7 @@ Its goal is to simplify and accelerate the process of identifying people who hav
 ### Privacy by Design
 
 Privacy by design requires that user privacy is taken into account throughout the whole engineering process.
-Decentralised data storage enables EINS users to store their geolocation data on their own devices, for both improved privacy as well as security. 
+Decentralised data storage enables EINS users to store their data on their own devices, for both improved privacy as well as security. 
 
 ### Self Sovereign Identity
 
