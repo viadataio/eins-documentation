@@ -13,7 +13,7 @@ activate User
 activate App
 abox over App:Public server key is embedded in the app.
 abox over App:Generate/Get Key Pair.
-abox over App:Generate/get app Id.
+abox over App:Generate/get app instance Id.
 abox over App:Generate 32 byte client seed
 abox over App:Generate 48 byte pre-master-secret (PMS)
 abox over App:Encrypt PMS using server public encryption key
