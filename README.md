@@ -21,9 +21,9 @@ The principle of self sovereign identity aims to put the ownership of a user's o
 
 We have an external road map you can see provide feedback on our next features.
 
-Road Map: <a href="https://trello.com/b/cqPsEccR/ich-habs-open-feature-roadmap">Link</a>
+Road Map: <a href="https://trello.com/b/oTRwCaZr/eins-roadmap">Link</a>
 
-User Journeys: <a href="https://github.com/viadataio/eins-documentation/blob/master/user_journeys/eins%20_user_journey%20v1.0.0.pdf">Link</a>
+User Journeys: <a href="https://github.com/viadataio/eins-documentation/blob/master/general/EINS%20User%20Journey%20v1.1.0.pdf">Link</a>
 
 ## Repositories
 
@@ -35,7 +35,7 @@ Backend Interface: Coming Soon
 
 ## Architecture
 
-Architecture Overview: <a href="https://drive.google.com/a/viadata.io/file/d/15pGhhTioM0WS0AUlvAqBDclqIiv46d2r/view?usp=sharing">Diagram</a>
+Architecture Overview: <a href="https://raw.githubusercontent.com/viadataio/eins-documentation/master/backend/EINS%20Architecture%20Overview%20v1.1.0.png">Diagram</a>
 
 
 ## Further Documentation
