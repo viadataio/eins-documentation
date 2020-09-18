@@ -1,8 +1,10 @@
-<img src="lemon.png" height="164" width="148">
+
+<img src="lemon.png" height="300" align="right" >
+
 
 ## Introduction 
 
-This repository contains a solution for a decentralized privacy preserving contact tracing system named <a href="https://ichhabs.app">Lemon</a>.
+This repository contains a solution for a decentralized privacy preserving contact tracing system named <a href="https://lemonhealth.app">LEMON</a>.
 
 ### Goal
 
@@ -11,7 +13,7 @@ Its goal is to simplify and accelerate the process of identifying people who hav
 ### Privacy by Design
 
 Privacy by design requires that user privacy is taken into account throughout the whole engineering process.
-Decentralised data storage enables Lemon users to store their data on their own devices, for both improved privacy as well as security. 
+Decentralised data storage enables LEMON users to store their data on their own devices, for both improved privacy as well as security. 
 
 ### Self Sovereign Identity
 
@@ -20,8 +22,6 @@ The principle of self sovereign identity aims to put the ownership of a user's o
 ## Road Map
 
 We have an external road map you can see provide feedback on our next features.
-
-Road Map: <a href="https://trello.com/b/oTRwCaZr/eins-roadmap">Link</a>
 
 User Journeys: <a href="https://github.com/viadataio/eins-documentation/blob/master/general/Lemon%20User%20Journey%20v1.1.0.pdf">Link</a>
 
