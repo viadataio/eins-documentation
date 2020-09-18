@@ -1,8 +1,8 @@
-<img src="eins.png" height="164" width="148">
+<img src="lemon.png" height="164" width="148">
 
 ## Introduction 
 
-This repository contains a solution for a decentralized privacy preserving contact tracing system named <a href="https://ichhabs.app">EINS</a>.
+This repository contains a solution for a decentralized privacy preserving contact tracing system named <a href="https://ichhabs.app">Lemon</a>.
 
 ### Goal
 
@@ -11,7 +11,7 @@ Its goal is to simplify and accelerate the process of identifying people who hav
 ### Privacy by Design
 
 Privacy by design requires that user privacy is taken into account throughout the whole engineering process.
-Decentralised data storage enables EINS users to store their data on their own devices, for both improved privacy as well as security. 
+Decentralised data storage enables Lemon users to store their data on their own devices, for both improved privacy as well as security. 
 
 ### Self Sovereign Identity
 
@@ -23,7 +23,7 @@ We have an external road map you can see provide feedback on our next features.
 
 Road Map: <a href="https://trello.com/b/oTRwCaZr/eins-roadmap">Link</a>
 
-User Journeys: <a href="https://github.com/viadataio/eins-documentation/blob/master/general/EINS%20User%20Journey%20v1.1.0.pdf">Link</a>
+User Journeys: <a href="https://github.com/viadataio/eins-documentation/blob/master/general/Lemon%20User%20Journey%20v1.1.0.pdf">Link</a>
 
 ## Repositories
 
@@ -35,7 +35,7 @@ Backend Interface: Coming Soon
 
 ## Architecture
 
-Architecture Overview: <a href="https://raw.githubusercontent.com/viadataio/eins-documentation/master/backend/EINS%20Architecture%20Overview%20v1.1.0.png">Diagram</a>
+Architecture Overview: <a href="https://github.com/viadataio/eins-documentation/blob/master/backend/LEMON%20AWS%20Architecture%20Overview%20v1.1.0.png">Diagram</a>
 
 
 ## Further Documentation
