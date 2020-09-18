@@ -19,11 +19,6 @@ Decentralised data storage enables LEMON users to store their data on their own 
 
 The principle of self sovereign identity aims to put the ownership of a user's online identity back in their own hands. This can be done in many ways, and consists of many sub approaches, more recently the introduction of decentralized ledger technology to provide trustless verification of identities (including pseudonyms identities) and fully secure data encryption and ownership.
 
-## Road Map
-
-We have an external road map you can see provide feedback on our next features.
-
-User Journeys: <a href="https://github.com/viadataio/eins-documentation/blob/master/general/Lemon%20User%20Journey%20v1.1.0.pdf">Link</a>
 
 ## Repositories
 
